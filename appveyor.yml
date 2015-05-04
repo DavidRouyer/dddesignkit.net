@@ -3,7 +3,6 @@ init:
 build_script:
   - cmd: build.cmd BuildApp
   - cmd: build.cmd UnitTests
-  - cmd: build.cmd ConventionTests
   - cmd: build.cmd IntegrationTests -ev DDDESIGNKIT_OAUTHTOKEN "%DDDESIGNKIT_OAUTHTOKEN%"
   - cmd: build.cmd SourceLink
 test: off
