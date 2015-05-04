@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8E6B7E5E-3261-4922-9B36-BF2D98006C88}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Dddesignkit</RootNamespace>
+    <AssemblyName>Dddesignkit</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http, Version=2.2.13.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.13\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="Authentication\AnonymousAuthenticator.cs" />
+    <Compile Include="Authentication\AuthenticationType.cs" />
+    <Compile Include="Authentication\Authenticator.cs" />
+    <Compile Include="Authentication\IAuthenticationHandler.cs" />
+    <Compile Include="Authentication\TokenAuthenticator.cs" />
+    <Compile Include="Clients\ApiClient.cs" />
+    <Compile Include="Clients\IUsersClient.cs" />
+    <Compile Include="Clients\UsersClient.cs" />
+    <Compile Include="DribbbleClient.cs" />
+    <Compile Include="Exceptions\ApiException.cs" />
+    <Compile Include="Exceptions\AuthorizationException.cs" />
+    <Compile Include="Helpers\ApiExtensions.cs" />
+    <Compile Include="Helpers\Ensure.cs" />
+    <Compile Include="Helpers\StringExtensions.cs" />
+    <Compile Include="Helpers\UriExtensions.cs" />
+    <Compile Include="Http\ApiConnection.cs" />
+    <Compile Include="Http\ApiResponse.cs" />
+    <Compile Include="Http\Connection.cs" />
+    <Compile Include="Http\Credentials.cs" />
+    <Compile Include="Http\CredentialsExtensions.cs" />
+    <Compile Include="Http\HttpClientAdapter.cs" />
+    <Compile Include="Http\IApiConnection.cs" />
+    <Compile Include="Http\IConnection.cs" />
+    <Compile Include="Http\ICredentialStore.cs" />
+    <Compile Include="Http\IHttpClient.cs" />
+    <Compile Include="Http\InMemoryCredentialStore.cs" />
+    <Compile Include="Http\IRequest.cs" />
+    <Compile Include="Http\IResponse.cs" />
+    <Compile Include="Http\JsonHttpPipeline.cs" />
+    <Compile Include="Http\JsonLowerCaseUnderscoreContractResolver.cs" />
+    <Compile Include="Http\ProductHeaderValue.cs" />
+    <Compile Include="Http\Request.cs" />
+    <Compile Include="Http\Response.cs" />
+    <Compile Include="IDribbbleClient.cs" />
+    <Compile Include="Models\Response\Account.cs" />
+    <Compile Include="Models\Response\ApiError.cs" />
+    <Compile Include="Models\Response\ApiErrorDetail.cs" />
+    <Compile Include="Models\Response\User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
