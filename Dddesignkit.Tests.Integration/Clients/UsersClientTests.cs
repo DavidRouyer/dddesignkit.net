@@ -21,5 +21,19 @@ namespace Dddesignkit.Tests.Integration.Clients
                 Assert.Equal(1, user.Id);
             }
         }
+
+        public class TheCurrentMethod
+        {
+            [IntegrationTest]
+            public async Task ReturnsSpecifiedUser()
+            {
+                var dribbble = Helper.GetAuthenticatedClient();
+
+                var user = await dribbble.User.Current();
+
+                Assert.Equal(Helper.UserName, user.Username);
+
+            }
+        }
     }
 }
