@@ -40,5 +40,27 @@ namespace Dddesignkit.Tests.Clients
                 await AssertEx.Throws<ArgumentNullException>(() => userEndpoint.Get(null));
             }
         }
+
+        public class TheCurrentMethod
+        {
+            [Fact]
+            public void RequestsCorrectUrl()
+            {
+                var endpoint = new Uri("user", UriKind.Relative);
+                var client = Substitute.For<IApiConnection>();
+                var usersClient = new UsersClient(client);
+
+                usersClient.Current();
+
+                client.Received().Get<User>(endpoint);
+            }
+
+            [Fact]
+            public async Task ThrowsIfGivenNullUser()
+            {
+                var userEndpoint = new UsersClient(Substitute.For<IApiConnection>());
+                await AssertEx.Throws<ArgumentNullException>(() => userEndpoint.Get(null));
+            }
+        }
     }
 }

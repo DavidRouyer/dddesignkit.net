@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Dddesignkit.Tests.Helpers
+namespace Dddesignkit.Tests
 {
     internal class Args
     {

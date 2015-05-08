@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace Dddesignkit.Models.Response
@@ -28,16 +29,19 @@ namespace Dddesignkit.Models.Response
         /// <summary>
         /// The error message
         /// </summary>
+        [JsonProperty]
         public string Message { get; protected set; }
 
         /// <summary>
         /// URL to the documentation for this error.
         /// </summary>
+        [JsonProperty]
         public string DocumentationUrl { get; protected set; }
 
         /// <summary>
         /// Additional details about the error
         /// </summary>
+        [JsonProperty]
         public IReadOnlyList<ApiErrorDetail> Errors { get; protected set; }
     }
 }

@@ -46,9 +46,12 @@
     <Compile Include="Authentication\TokenAuthenticatorTests.cs" />
     <Compile Include="Clients\UsersClientTests.cs" />
     <Compile Include="DribbbleClientTests.cs" />
+    <Compile Include="Exceptions\ApiExceptionTests.cs" />
     <Compile Include="Helpers\Arg.cs" />
     <Compile Include="Helpers\AssertEx.cs" />
     <Compile Include="Helpers\ReflexionExtensions.cs" />
+    <Compile Include="Helpers\StringExtensionsTests.cs" />
+    <Compile Include="Helpers\UriExtensionsTests.cs" />
     <Compile Include="Http\ApiConnectionTests.cs" />
     <Compile Include="Http\HttpClientAdapterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,9 +90,6 @@
       <HintPath>..\packages\xunit.extensibility.core.2.0.0\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dddesignkit\Dddesignkit.csproj">
