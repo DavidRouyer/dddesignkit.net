@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dddesignkit.Models.Response
+namespace Dddesignkit
 {
     public abstract class Account
     {
@@ -97,16 +97,5 @@ namespace Dddesignkit.Models.Response
 
         [JsonProperty]
         public DateTimeOffset UpdatedAt { get; protected set; }
-    }
-
-    public class Links
-    {
-        protected Links() {}
-
-        [JsonProperty]
-        public string Web { get; private set; }
-
-        [JsonProperty]
-        public string Twitter { get; private set; }
     }
 }

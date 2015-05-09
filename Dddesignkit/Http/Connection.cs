@@ -1,5 +1,4 @@
-﻿using Dddesignkit.Exceptions;
-using Dddesignkit.Internal;
+﻿using Dddesignkit.Internal;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -181,11 +180,9 @@ namespace Dddesignkit
         static readonly Dictionary<HttpStatusCode, Func<IResponse, Exception>> _httpExceptionMap =
     new Dictionary<HttpStatusCode, Func<IResponse, Exception>>
             {
-                { HttpStatusCode.Unauthorized, GetExceptionForUnauthorized }
-                // TODO Handle errors
-                /*,
+                { HttpStatusCode.Unauthorized, GetExceptionForUnauthorized },
                 { HttpStatusCode.Forbidden, GetExceptionForForbidden },
-                { HttpStatusCode.NotFound, response => new NotFoundException(response) },
+                { HttpStatusCode.NotFound, response => new NotFoundException(response) }/*,
                 { (HttpStatusCode)422, response => new ApiValidationException(response) }*/
             };
 
@@ -193,6 +190,16 @@ namespace Dddesignkit
         {
 
             return new AuthorizationException(response);
+        }
+
+        static Exception GetExceptionForForbidden(IResponse response)
+        {
+            string body = response.Body as string ?? "";
+            return body.Contains("rate limit exceeded")
+                ? new RateLimitExceededException(response)
+                : body.Contains("number of login attempts exceeded")
+                    ? new ForbiddenException(response)//new LoginAttemptsExceededException(response)
+                    : new ForbiddenException(response);
         }
 
         public Uri BaseAddress { get; private set; }
@@ -235,7 +242,7 @@ namespace Dddesignkit
         static string FormatUserAgent(ProductHeaderValue productInformation)
         {
             return string.Format(CultureInfo.InvariantCulture,
-                "{0} ({1} {2}; {3}; {4}; Octokit {5})",
+                "{0} ({1} {2}; {3}; {4}; DddesignkitTests {5})",
                 productInformation,
 #if NETFX_CORE
                 // Microsoft doesn't want you changing your Windows Store Application based on the processor or

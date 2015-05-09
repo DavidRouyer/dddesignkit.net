@@ -15,6 +15,7 @@ namespace Dddesignkit.Internal
             Ensure.ArgumentNotNull(headers, "headers");
 
             Headers = new ReadOnlyDictionary<string, string>(headers);
+            ApiInfo = ApiInfoParser.ParseResponseHeaders(headers);
         }
 
         public Response(HttpStatusCode statusCode, object body, IDictionary<string, string> headers, string contentType)
@@ -24,6 +25,7 @@ namespace Dddesignkit.Internal
             StatusCode = statusCode;
             Body = body;
             Headers = new ReadOnlyDictionary<string, string>(headers);
+            ApiInfo = ApiInfoParser.ParseResponseHeaders(headers);
             ContentType = contentType;
         }
 
@@ -35,6 +37,10 @@ namespace Dddesignkit.Internal
         /// Information about the API.
         /// </summary>
         public IReadOnlyDictionary<string, string> Headers { get; private set; }
+        /// <summary>
+        /// Information about the API response parsed from the response headers.
+        /// </summary>
+        public ApiInfo ApiInfo { get; private set; }
         /// <summary>
         /// The response status code.
         /// </summary>

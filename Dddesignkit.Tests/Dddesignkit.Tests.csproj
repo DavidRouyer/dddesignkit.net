@@ -44,16 +44,23 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Authentication\TokenAuthenticatorTests.cs" />
+    <Compile Include="Clients\ShotsClientTests.cs" />
     <Compile Include="Clients\UsersClientTests.cs" />
     <Compile Include="DribbbleClientTests.cs" />
     <Compile Include="Exceptions\ApiExceptionTests.cs" />
+    <Compile Include="Exceptions\RateLimitExceededExceptionTests.cs" />
     <Compile Include="Helpers\Arg.cs" />
     <Compile Include="Helpers\AssertEx.cs" />
     <Compile Include="Helpers\ReflexionExtensions.cs" />
     <Compile Include="Helpers\StringExtensionsTests.cs" />
     <Compile Include="Helpers\UriExtensionsTests.cs" />
     <Compile Include="Http\ApiConnectionTests.cs" />
+    <Compile Include="Http\ApiInfoParserTests.cs" />
+    <Compile Include="Http\ConnectionTests.cs" />
     <Compile Include="Http\HttpClientAdapterTests.cs" />
+    <Compile Include="Http\RateLimitTests.cs" />
+    <Compile Include="Http\RequestTests.cs" />
+    <Compile Include="Http\ResponseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelfTests.cs" />
   </ItemGroup>

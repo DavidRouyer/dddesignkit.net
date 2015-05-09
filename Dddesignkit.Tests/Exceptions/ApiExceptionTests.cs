@@ -1,5 +1,4 @@
-﻿using Dddesignkit.Exceptions;
-using Dddesignkit.Internal;
+﻿using Dddesignkit.Internal;
 using NSubstitute;
 using System;
 using System.Collections.Generic;
@@ -43,7 +42,7 @@ namespace Dddesignkit.Tests.Exceptions
             }
 
             [Fact]
-            public void CreatesGitHubErrorFromJsonResponse()
+            public void CreatesDribbbleErrorFromJsonResponse()
             {
                 var response = new Response(
                     HttpStatusCode.GatewayTimeout,
@@ -65,7 +64,7 @@ namespace Dddesignkit.Tests.Exceptions
             [InlineData(null)]
             [InlineData("{{{{{")]
             [InlineData("<html><body><h1>502 Bad Gateway</h1>The server returned an invalid or incomplete response.</body></html>")]
-            public void CreatesGitHubErrorIfResponseMessageIsNotValidJson(string responseContent)
+            public void CreatesDribbbleErrorIfResponseMessageIsNotValidJson(string responseContent)
             {
                 var response = new Response(
                     HttpStatusCode.GatewayTimeout,
@@ -80,7 +79,7 @@ namespace Dddesignkit.Tests.Exceptions
             }
 
             [Fact]
-            public void CreatesEmptyGitHubErrorWhenResponseBodyIsNull()
+            public void CreatesEmptyDribbbleErrorWhenResponseBodyIsNull()
             {
                 var response = Substitute.For<IResponse>();
                 response.Body.Returns("test");

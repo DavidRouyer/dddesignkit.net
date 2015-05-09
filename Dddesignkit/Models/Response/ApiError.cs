@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Dddesignkit.Models.Response
+namespace Dddesignkit
 {
     /// <summary>
     /// Error payload from the API reposnse

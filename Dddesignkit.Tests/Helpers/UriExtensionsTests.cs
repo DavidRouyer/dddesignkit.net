@@ -64,24 +64,24 @@ namespace Dddesignkit.Tests.Helpers
             [Fact]
             public void CombinesExistingParametersWithNewParameters()
             {
-                var uri = new Uri("https://api.github.com/repositories/1/milestones?state=closed&sort=due_date&direction=asc&page=2");
+                var uri = new Uri("https://api.dribbble.com/v1/shots?list=animated&sort=comments&timeframe=week&page=2");
 
-                var parameters = new Dictionary<string, string> { { "state", "open" }, { "sort", "other" } };
+                var parameters = new Dictionary<string, string> { { "list", "playoffs" }, { "sort", "recent" } };
 
                 var actual = uri.ApplyParameters(parameters);
 
-                Assert.True(actual.Query.Contains("state=open"));
-                Assert.True(actual.Query.Contains("sort=other"));
-                Assert.True(actual.Query.Contains("direction=asc"));
+                Assert.True(actual.Query.Contains("list=playoffs"));
+                Assert.True(actual.Query.Contains("sort=recent"));
+                Assert.True(actual.Query.Contains("timeframe=week"));
                 Assert.True(actual.Query.Contains("page=2"));
             }
 
             [Fact]
             public void DoesNotChangePassedInDictionary()
             {
-                var uri = new Uri("https://api.github.com/repositories/1/milestones?state=closed&sort=due_date&direction=asc&page=2");
+                var uri = new Uri("https://api.dribbble.com/v1/shots?list=animated&sort=comments&timeframe=week&page=2");
 
-                var parameters = new Dictionary<string, string> { { "state", "open" }, { "sort", "other" } };
+                var parameters = new Dictionary<string, string> { { "list", "playoffs" }, { "sort", "recent" } };
 
                 uri.ApplyParameters(parameters);
 

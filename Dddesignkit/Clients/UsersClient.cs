@@ -1,8 +1,5 @@
-﻿using Dddesignkit.Models.Response;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Dddesignkit.Clients
@@ -22,14 +19,14 @@ namespace Dddesignkit.Clients
         }
 
         /// <summary>
-        /// Returns the user specified by the login.
+        /// Returns the user specified by the username.
         /// </summary>
-        /// <param name="login">The login name for the user</param>
-        public Task<User> Get(string login)
+        /// <param name="username">The username for the user</param>
+        public Task<User> Get(string username)
         {
-            Ensure.ArgumentNotNullOrEmptyString(login, "login");
+            Ensure.ArgumentNotNullOrEmptyString(username, "username");
 
-            var endpoint = "users/{0}".FormatUri(login);
+            var endpoint = "users/{0}".FormatUri(username);
             return ApiConnection.Get<User>(endpoint);
         }
 
@@ -41,6 +38,18 @@ namespace Dddesignkit.Clients
         public Task<User> Current()
         {
             return ApiConnection.Get<User>(_userEndpoint);
+        }
+
+        /// <summary>
+        /// Get all shots owned by the user.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns>A <see cref="IReadOnlyList{Bucket}"/> of <see cref="Bucket"/>.</returns>
+        public Task<IReadOnlyList<Bucket>> GetAllBuckets(string username)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(username, "username");
+
+            return ApiConnection.GetAll<Bucket>(ApiUrls.Buckets(username));
         }
     }
 }

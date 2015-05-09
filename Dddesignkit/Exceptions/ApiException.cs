@@ -1,11 +1,10 @@
 ﻿using Dddesignkit.Internal;
-using Dddesignkit.Models.Response;
 using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Runtime.Serialization;
 
-namespace Dddesignkit.Exceptions
+namespace Dddesignkit
 {
 
     /// <summary>

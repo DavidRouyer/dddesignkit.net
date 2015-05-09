@@ -1,39 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Dddesignkit.Tests.Integration;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Dddesignkit.Tests.Integration.Clients
+public class UsersClientTests
 {
-    public class UsersClientTests
+    public class TheGetMethod
     {
-        public class TheGetMethod
+        [IntegrationTest]
+        public async Task ReturnsSpecifiedUser()
         {
-            [IntegrationTest]
-            public async Task ReturnsSpecifiedUser()
-            {
-                var dribbble = Helper.GetAuthenticatedClient();
+            var dribbble = Helper.GetAuthenticatedClient();
 
-                var user = await dribbble.User.Get("simplebits");
+            var user = await dribbble.User.Get("simplebits");
 
-                Assert.Equal(1, user.Id);
-            }
+            Assert.Equal(1, user.Id);
         }
+    }
 
-        public class TheCurrentMethod
+    public class TheCurrentMethod
+    {
+        [IntegrationTest]
+        public async Task ReturnsCurrentUser()
         {
-            [IntegrationTest]
-            public async Task ReturnsSpecifiedUser()
-            {
-                var dribbble = Helper.GetAuthenticatedClient();
+            var dribbble = Helper.GetAuthenticatedClient();
 
-                var user = await dribbble.User.Current();
+            var user = await dribbble.User.Current();
 
-                Assert.Equal(Helper.UserName, user.Username);
+            Assert.Equal(Helper.UserName, user.Username);
 
-            }
+        }
+    }
+
+    public class TheGetAllBucketsMethod
+    {
+        [IntegrationTest]
+        public async Task ReturnsAllUserBuckets()
+        {
+            var dribbble = Helper.GetAuthenticatedClient();
+
+            var buckets = await dribbble.User.GetAllBuckets("simplebits");
+
+            Assert.True(buckets.Count >= 10);
         }
     }
 }

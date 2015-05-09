@@ -47,6 +47,7 @@ namespace Dddesignkit
             Connection = connection;
             var apiConnection = new ApiConnection(connection);
             User = new UsersClient(apiConnection);
+            Shots = new ShotsClient(apiConnection);
         }
 
         /// <summary>
@@ -89,5 +90,13 @@ namespace Dddesignkit
         /// Refer to the API docmentation for more information: https://developer.dribbble.com/v1/users/
         /// </remarks>
         public IUsersClient User { get; private set; }
+
+        /// <summary>
+        /// Access Dribbble's Shots API.
+        /// </summary>
+        /// <remarks>
+        /// Refer to the API docmentation for more information: https://developer.dribbble.com/v1/shots/
+        /// </remarks>
+        public IShotsClient Shots { get; private set; }
     }
 }

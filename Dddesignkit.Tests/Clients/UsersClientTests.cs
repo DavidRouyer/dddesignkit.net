@@ -1,5 +1,4 @@
 ﻿using Dddesignkit.Clients;
-using Dddesignkit.Models.Response;
 using Dddesignkit.Tests.Helpers;
 using NSubstitute;
 using System;
@@ -60,6 +59,28 @@ namespace Dddesignkit.Tests.Clients
             {
                 var userEndpoint = new UsersClient(Substitute.For<IApiConnection>());
                 await AssertEx.Throws<ArgumentNullException>(() => userEndpoint.Get(null));
+            }
+        }
+
+        public class TheGetAllBucketsMethod
+        {
+            [Fact]
+            public void RequestsCorrectUrl()
+            {
+                var endpoint = new Uri("users/username/buckets", UriKind.Relative);
+                var client = Substitute.For<IApiConnection>();
+                var usersClient = new UsersClient(client);
+
+                usersClient.GetAllBuckets("username");
+
+                client.Received().GetAll<Bucket>(endpoint);
+            }
+
+            [Fact]
+            public async Task ThrowsIfGivenNullUser()
+            {
+                var userEndpoint = new UsersClient(Substitute.For<IApiConnection>());
+                await AssertEx.Throws<ArgumentNullException>(() => userEndpoint.GetAllBuckets(null));
             }
         }
     }

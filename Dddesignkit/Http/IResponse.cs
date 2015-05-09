@@ -32,6 +32,11 @@ namespace Dddesignkit
         IReadOnlyDictionary<string, string> Headers { get; }
 
         /// <summary>
+        /// Information about the API response parsed from the response headers.
+        /// </summary>
+        ApiInfo ApiInfo { get; }
+
+        /// <summary>
         /// The response status code.
         /// </summary>
         HttpStatusCode StatusCode { get; }

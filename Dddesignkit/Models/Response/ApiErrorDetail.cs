@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace Dddesignkit.Models.Response
+namespace Dddesignkit
 {
 #if !NETFX_CORE
     [Serializable]

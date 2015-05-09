@@ -12,11 +12,19 @@ namespace Dddesignkit
         IConnection Connection { get; }
 
         /// <summary>
-        /// Access GitHub's Users API.
+        /// Access Dribbble's Users API.
         /// </summary>
         /// <remarks>
         /// Refer to the API docmentation for more information: https://developer.dribbble.com/v1/users/
         /// </remarks>
         IUsersClient User { get; }
+
+        /// <summary>
+        /// Access Dribbble's Shots API.
+        /// </summary>
+        /// <remarks>
+        /// Refer to the API docmentation for more information: https://developer.dribbble.com/v1/shots/
+        /// </remarks>
+        IShotsClient Shots { get; }
     }
 }

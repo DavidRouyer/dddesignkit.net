@@ -20,7 +20,6 @@ namespace Dddesignkit.Internal
 
             if (!request.Headers.ContainsKey("Accept"))
             {
-
                 request.Headers["Accept"] = v1ApiVersion;
             }
 

@@ -53,5 +53,42 @@ namespace Dddesignkit.Tests.Http
                 await AssertEx.Throws<ArgumentNullException>(async () => await client.Get<object>(getUri, new Dictionary<string, string>(), null));
             }
         }
+
+        public class TheGetAllMethod
+        {
+            [Fact]
+            public async Task MakesGetRequestForAllItems()
+            {
+                var getAllUri = new Uri("anything", UriKind.Relative);
+                IApiResponse<List<object>> response = new ApiResponse<List<object>>(
+                    new Response(),
+                    new List<object> { new object(), new object() });
+                var connection = Substitute.For<IConnection>();
+                connection.Get<List<object>>(Args.Uri, null, null).Returns(Task.FromResult(response));
+                var apiConnection = new ApiConnection(connection);
+
+                var data = await apiConnection.GetAll<object>(getAllUri);
+
+                Assert.Equal(2, data.Count);
+                connection.Received().Get<List<object>>(getAllUri, null, null);
+            }
+
+            [Fact]
+            public async Task EnsuresArgumentNotNull()
+            {
+                var client = new ApiConnection(Substitute.For<IConnection>());
+
+                // One argument
+                await AssertEx.Throws<ArgumentNullException>(async () => await client.GetAll<object>(null));
+
+                // Two argument
+                await AssertEx.Throws<ArgumentNullException>(async () =>
+                    await client.GetAll<object>(null, new Dictionary<string, string>()));
+
+                // Three arguments
+                await AssertEx.Throws<ArgumentNullException>(async () =>
+                    await client.GetAll<object>(null, new Dictionary<string, string>(), "accepts"));
+            }
+        }
     }
 }
