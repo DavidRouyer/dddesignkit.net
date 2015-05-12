@@ -103,7 +103,11 @@
     <Compile Include="Models\Response\ApiError.cs" />
     <Compile Include="Models\Response\ApiErrorDetail.cs" />
     <Compile Include="Models\Response\Bucket.cs" />
+    <Compile Include="Models\Response\Followers.cs" />
+    <Compile Include="Models\Response\Following.cs" />
+    <Compile Include="Models\Response\Like.cs" />
     <Compile Include="Models\Response\Links.cs" />
+    <Compile Include="Models\Response\Project.cs" />
     <Compile Include="Models\Response\Shot.cs" />
     <Compile Include="Models\Response\Team.cs" />
     <Compile Include="Models\Response\User.cs" />
