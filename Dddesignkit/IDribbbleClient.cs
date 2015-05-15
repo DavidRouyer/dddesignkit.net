@@ -1,5 +1,4 @@
-﻿using Dddesignkit.Clients;
-namespace Dddesignkit
+﻿namespace Dddesignkit
 {
     /// <summary>
     /// A client for the Dribbble API v1. You can read more about the api here : http://developer.dribbble.com/v1

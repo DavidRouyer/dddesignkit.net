@@ -18,6 +18,7 @@ namespace Dddesignkit
         static readonly Uri _currentUserShotLikesUrl = new Uri("user/likes", UriKind.Relative);
         static readonly Uri _currentUserProjectsUrl = new Uri("user/projects", UriKind.Relative);
         static readonly Uri _currentUserShotsUrl = new Uri("user/shots", UriKind.Relative);
+        static readonly Uri _currentUserTeamsUrl = new Uri("user/teams", UriKind.Relative);
 
         public static Uri Buckets(string username)
         {
@@ -82,6 +83,42 @@ namespace Dddesignkit
         public static Uri Shots()
         {
             return _currentUserShotsUrl;
+        }
+
+        public static Uri Teams(string username)
+        {
+            return "users/{0}/teams".FormatUri(username);
+        }
+
+        public static Uri Teams()
+        {
+            return _currentUserTeamsUrl;
+        }
+
+        /// <summary>
+        /// Creates the relative <see cref="Uri"/> for checking is the current user is following another user
+        /// </summary>
+        /// <param name="following">name of the user followed</param>
+        /// <returns>The <see cref="Uri"/> for checking if the current user follows the specified user.</returns>
+        public static Uri IsFollowing(string following)
+        {
+            return "user/following/{0}".FormatUri(following);
+        }
+
+        /// <summary>
+        /// Creates the relative <see cref="Uri"/> for checking if a user is following another user
+        /// </summary>
+        /// <param name="login">name of the user following</param>
+        /// <param name="following">name of the user followed</param>
+        /// <returns>The <see cref="Uri"/> for checking if the specified user follows another user</returns>
+        public static Uri IsFollowing(string username, string following)
+        {
+            return "users/{0}/following/{1}".FormatUri(username, following);
+        }
+
+        public static Uri Follow(string follow)
+        {
+            return "users/{0}/follow".FormatUri(follow);
         }
     }
 }

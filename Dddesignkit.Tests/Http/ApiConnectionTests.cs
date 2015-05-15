@@ -90,5 +90,70 @@ namespace Dddesignkit.Tests.Http
                     await client.GetAll<object>(null, new Dictionary<string, string>(), "accepts"));
             }
         }
+
+        public class ThePutMethod
+        {
+            [Fact]
+            public async Task MakesPutRequestWithSuppliedData()
+            {
+                var putUri = new Uri("anything", UriKind.Relative);
+                var sentData = new object();
+                IApiResponse<object> response = new ApiResponse<object>(new Response());
+                var connection = Substitute.For<IConnection>();
+                connection.Put<object>(Args.Uri, Args.Object).Returns(Task.FromResult(response));
+                var apiConnection = new ApiConnection(connection);
+
+                var data = await apiConnection.Put<object>(putUri, sentData);
+
+                Assert.Same(data, response.Body);
+                connection.Received().Put<object>(putUri, sentData);
+            }
+
+            [Fact]
+            public async Task EnsuresArgumentsNotNull()
+            {
+                var putUri = new Uri("", UriKind.Relative);
+                var connection = new ApiConnection(Substitute.For<IConnection>());
+
+                // 2 parameter overload
+                await AssertEx.Throws<ArgumentNullException>(async () =>
+                    await connection.Put<object>(null, new object()));
+                await AssertEx.Throws<ArgumentNullException>(async () =>
+                    await connection.Put<object>(putUri, null));
+            }
+        }
+
+        public class TheDeleteMethod
+        {
+            [Fact]
+            public async Task MakesDeleteRequest()
+            {
+                var deleteUri = new Uri("anything", UriKind.Relative);
+                HttpStatusCode statusCode = HttpStatusCode.NoContent;
+                var connection = Substitute.For<IConnection>();
+                connection.Delete(Args.Uri).Returns(Task.FromResult(statusCode));
+                var apiConnection = new ApiConnection(connection);
+
+                await apiConnection.Delete(deleteUri);
+
+                connection.Received().Delete(deleteUri);
+            }
+
+            [Fact]
+            public async Task EnsuresArgumentNotNull()
+            {
+                var connection = new ApiConnection(Substitute.For<IConnection>());
+                await AssertEx.Throws<ArgumentNullException>(async () => await connection.Delete(null));
+            }
+        }
+
+        public class TheCtor
+        {
+            [Fact]
+            public void EnsuresNonNullArguments()
+            {
+                Assert.Throws<ArgumentNullException>(() => new ApiConnection(null));
+            }
+        }
     }
 }

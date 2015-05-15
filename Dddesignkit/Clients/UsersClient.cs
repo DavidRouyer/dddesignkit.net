@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Dddesignkit.Clients
+namespace Dddesignkit
 {
     /// <summary>
     /// A client for Dribbble's Users API.
@@ -14,8 +14,18 @@ namespace Dddesignkit.Clients
     {
         static readonly Uri _userEndpoint = new Uri("user", UriKind.Relative);
 
+        /// <summary>
+        /// Initializes a new Dribbble Users API client.
+        /// </summary>
+        /// <param name="apiConnection">An API connection</param>
         public UsersClient(IApiConnection apiConnection) : base(apiConnection)
         {
+            Buckets = new UserBucketsClient(apiConnection);
+            Followers = new FollowersClient(apiConnection);
+            Likes = new UserLikesClient(apiConnection);
+            Projects = new UserProjectsClient(apiConnection);
+            Shots = new UserShotsClient(apiConnection);
+            Teams = new UserTeamsClient(apiConnection);
         }
 
         /// <summary>
@@ -41,140 +51,51 @@ namespace Dddesignkit.Clients
         }
 
         /// <summary>
-        /// Get all shots owned by the user.
+        /// A client for Dribbble's User Buckets API
         /// </summary>
-        /// <param name="username"></param>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Bucket}"/> of <see cref="Bucket"/>.</returns>
-        public Task<IReadOnlyList<Bucket>> GetAllBuckets(string username)
-        {
-            Ensure.ArgumentNotNullOrEmptyString(username, "username");
-
-            return ApiConnection.GetAll<Bucket>(ApiUrls.Buckets(username));
-        }
+        /// <remarks>
+        /// See the <a href="http://developer.dribbble.com/v1/users/buckets/">Buckets API documentation</a> for more information.
+        ///</remarks>
+        public IUserBucketsClient Buckets { get; private set; }
 
         /// <summary>
-        /// Get all shots owned by the current user.
+        /// A client for Dribbble's User Followers API
         /// </summary>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Bucket}"/> of <see cref="Bucket"/>.</returns>
-        public Task<IReadOnlyList<Bucket>> GetAllBucketsForCurrent()
-        {
-            return ApiConnection.GetAll<Bucket>(ApiUrls.Buckets());
-        }
+        /// <remarks>
+        /// See the <a href="http://developer.dribbble.com/v1/users/followers/">Followers API documentation</a> for more information.
+        ///</remarks>
+        public IFollowersClient Followers { get; private set; }
 
         /// <summary>
-        /// Get all followers of the user.
+        /// A client for Dribbble's User Likes API
         /// </summary>
-        /// <param name="username"></param>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Follower}"/> of <see cref="Follower"/>.</returns>
-        public Task<IReadOnlyList<Followers>> GetAllFollowers(string username)
-        {
-            Ensure.ArgumentNotNullOrEmptyString(username, "username");
-
-            return ApiConnection.GetAll<Followers>(ApiUrls.Followers(username));
-        }
+        /// <remarks>
+        /// See the <a href="http://developer.dribbble.com/v1/users/likes/">Likes API documentation</a> for more information.
+        ///</remarks>
+        public IUserLikesClient Likes { get; private set; }
 
         /// <summary>
-        /// Get all followers for the current user.
+        /// A client for Dribbble's User Projects API
         /// </summary>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Follower}"/> of <see cref="Follower"/>.</returns>
-        public Task<IReadOnlyList<Followers>> GetAllFollowersForCurrent()
-        {
-            return ApiConnection.GetAll<Followers>(ApiUrls.Followers());
-        }
+        /// <remarks>
+        /// See the <a href="http://developer.dribbble.com/v1/users/projects/">Projects API documentation</a> for more information.
+        ///</remarks>
+        public IUserProjectsClient Projects { get; private set; }
 
         /// <summary>
-        /// Get all users followed by the user.
+        /// A client for Dribbble's User Shots API
         /// </summary>
-        /// <param name="username"></param>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Follower}"/> of <see cref="Follower"/>.</returns>
-        public Task<IReadOnlyList<Following>> GetAllFollowing(string username)
-        {
-            Ensure.ArgumentNotNullOrEmptyString(username, "username");
-
-            return ApiConnection.GetAll<Following>(ApiUrls.Following(username));
-        }
+        /// <remarks>
+        /// See the <a href="http://developer.dribbble.com/v1/users/shots/">Shots API documentation</a> for more information.
+        ///</remarks>
+        public IUserShotsClient Shots { get; private set; }
 
         /// <summary>
-        /// Get all users followed by the current user.
+        /// A client for Dribbble's User Teams API
         /// </summary>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Following}"/> of <see cref="Following"/>.</returns>
-        public Task<IReadOnlyList<Following>> GetAllFollowingForCurrent()
-        {
-            return ApiConnection.GetAll<Following>(ApiUrls.Following());
-        }
-
-        /// <summary>
-        /// Get all shots for users followed by the current user.
-        /// </summary>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Shot}"/> of <see cref="Shot"/>.</returns>
-        public Task<IReadOnlyList<Shot>> GetAllShotsUsersFollowedForCurrent()
-        {
-            return ApiConnection.GetAll<Shot>(ApiUrls.ShotsUserFollowed());
-        }
-
-        /// <summary>
-        /// Get all shot likes for the user.
-        /// </summary>
-        /// <param name="username"></param>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Like}"/> of <see cref="Like"/>.</returns>
-        public Task<IReadOnlyList<Like>> GetAllShotLikes(string username)
-        {
-            Ensure.ArgumentNotNullOrEmptyString(username, "username");
-
-            return ApiConnection.GetAll<Like>(ApiUrls.ShotLikes(username));
-        }
-
-        /// <summary>
-        /// Get all shot likes for the current user.
-        /// </summary>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Like}"/> of <see cref="Like"/>.</returns>
-        public Task<IReadOnlyList<Like>> GetAllShotLikesForCurrent()
-        {
-            return ApiConnection.GetAll<Like>(ApiUrls.ShotLikes());
-        }
-
-        /// <summary>
-        /// Get all projects for the user.
-        /// </summary>
-        /// <param name="username"></param>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Project}"/> of <see cref="Project"/>.</returns>
-        public Task<IReadOnlyList<Project>> GetAllProjects(string username)
-        {
-            Ensure.ArgumentNotNullOrEmptyString(username, "username");
-
-            return ApiConnection.GetAll<Project>(ApiUrls.Projects(username));
-        }
-
-        /// <summary>
-        /// Get all projects for the current user.
-        /// </summary>
-        /// <param name="username"></param>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Project}"/> of <see cref="Project"/>.</returns>
-        public Task<IReadOnlyList<Project>> GetAllProjectsForCurrent()
-        {
-            return ApiConnection.GetAll<Project>(ApiUrls.Projects());
-        }
-
-        /// <summary>
-        /// Get all shots for the user.
-        /// </summary>
-        /// <param name="username"></param>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Shot}"/> of <see cref="Shot"/>.</returns>
-        public Task<IReadOnlyList<Shot>> GetAllShots(string username)
-        {
-            Ensure.ArgumentNotNullOrEmptyString(username, "username");
-
-            return ApiConnection.GetAll<Shot>(ApiUrls.Shots(username));
-        }
-
-        /// <summary>
-        /// Get all shots for the current user.
-        /// </summary>
-        /// <param name="username"></param>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Shot}"/> of <see cref="Shot"/>.</returns>
-        public Task<IReadOnlyList<Shot>> GetAllShotsForCurrent()
-        {
-            return ApiConnection.GetAll<Shot>(ApiUrls.Shots());
-        }
+        /// <remarks>
+        /// See the <a href="http://developer.dribbble.com/v1/users/teams/">Teams API documentation</a> for more information.
+        ///</remarks>
+        public IUserTeamsClient Teams { get; private set; }
     }
 }

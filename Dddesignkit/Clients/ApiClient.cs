@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dddesignkit.Clients
+namespace Dddesignkit
 {
     /// <summary>
     /// Base class for an API client.

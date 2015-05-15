@@ -1,9 +1,21 @@
-﻿using Dddesignkit.Tests.Integration;
+﻿using Dddesignkit;
+using Dddesignkit.Tests.Integration;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
 public class UsersClientTests
 {
+    readonly IDribbbleClient _dribbble;
+    readonly User _currentUser;
+
+    public UsersClientTests()
+    {
+        _dribbble = Helper.GetAuthenticatedClient();
+        _currentUser = _dribbble.User.Current().Result;
+    }
+
     public class TheGetMethod
     {
         [IntegrationTest]
@@ -38,7 +50,7 @@ public class UsersClientTests
         {
             var dribbble = Helper.GetAuthenticatedClient();
 
-            var buckets = await dribbble.User.GetAllBuckets("simplebits");
+            var buckets = await dribbble.User.Buckets.GetAllBuckets("simplebits");
 
             Assert.True(buckets.Count >= 10);
         }
@@ -51,7 +63,7 @@ public class UsersClientTests
         {
             var dribbble = Helper.GetAuthenticatedClient();
 
-            var buckets = await dribbble.User.GetAllBucketsForCurrent();
+            var buckets = await dribbble.User.Buckets.GetAllBucketsForCurrent();
 
             Assert.True(buckets.Count >= 0);
         }
@@ -64,7 +76,7 @@ public class UsersClientTests
         {
             var dribbble = Helper.GetAuthenticatedClient();
 
-            var followers = await dribbble.User.GetAllFollowers("simblebits");
+            var followers = await dribbble.User.Followers.GetAllFollowers("simblebits");
 
             Assert.True(followers.Count >= 10);
         }
@@ -77,7 +89,7 @@ public class UsersClientTests
         {
             var dribbble = Helper.GetAuthenticatedClient();
 
-            var followers = await dribbble.User.GetAllFollowersForCurrent();
+            var followers = await dribbble.User.Followers.GetAllFollowersForCurrent();
 
             Assert.True(followers.Count >= 1);
         }
@@ -90,7 +102,7 @@ public class UsersClientTests
         {
             var dribbble = Helper.GetAuthenticatedClient();
 
-            var following = await dribbble.User.GetAllFollowing("simplebits");
+            var following = await dribbble.User.Followers.GetAllFollowing("simplebits");
 
             Assert.True(following.Count >= 10);
         }
@@ -103,7 +115,7 @@ public class UsersClientTests
         {
             var dribbble = Helper.GetAuthenticatedClient();
 
-            var following = await dribbble.User.GetAllFollowingForCurrent();
+            var following = await dribbble.User.Followers.GetAllFollowingForCurrent();
 
             Assert.True(following.Count >= 10);
         }
@@ -116,7 +128,7 @@ public class UsersClientTests
         {
             var dribbble = Helper.GetAuthenticatedClient();
 
-            var shotsFollowed = await dribbble.User.GetAllShotsUsersFollowedForCurrent();
+            var shotsFollowed = await dribbble.User.Followers.GetAllShotsUsersFollowedForCurrent();
 
             Assert.True(shotsFollowed.Count >= 10);
         }
@@ -129,7 +141,7 @@ public class UsersClientTests
         {
             var dribbble = Helper.GetAuthenticatedClient();
 
-            var likes = await dribbble.User.GetAllShotLikes("simplebits");
+            var likes = await dribbble.User.Likes.GetAllShotLikes("simplebits");
 
             Assert.True(likes.Count >= 10);
         }
@@ -142,7 +154,7 @@ public class UsersClientTests
         {
             var dribbble = Helper.GetAuthenticatedClient();
 
-            var likes = await dribbble.User.GetAllShotLikesForCurrent();
+            var likes = await dribbble.User.Likes.GetAllShotLikesForCurrent();
 
             Assert.True(likes.Count >= 10);
         }
@@ -155,7 +167,7 @@ public class UsersClientTests
         {
             var dribbble = Helper.GetAuthenticatedClient();
 
-            var projects = await dribbble.User.GetAllProjects("simplebits");
+            var projects = await dribbble.User.Projects.GetAllProjects("simplebits");
 
             Assert.True(projects.Count >= 5);
         }
@@ -168,7 +180,7 @@ public class UsersClientTests
         {
             var dribbble = Helper.GetAuthenticatedClient();
 
-            var projects = await dribbble.User.GetAllProjectsForCurrent();
+            var projects = await dribbble.User.Projects.GetAllProjectsForCurrent();
 
             Assert.True(projects.Count >= 0);
         }
@@ -181,7 +193,7 @@ public class UsersClientTests
         {
             var dribbble = Helper.GetAuthenticatedClient();
 
-            var shots = await dribbble.User.GetAllShots("simplebits");
+            var shots = await dribbble.User.Shots.GetAllShots("simplebits");
 
             Assert.True(shots.Count >= 10);
         }
@@ -194,9 +206,35 @@ public class UsersClientTests
         {
             var dribbble = Helper.GetAuthenticatedClient();
 
-            var shots = await dribbble.User.GetAllShotsForCurrent();
+            var shots = await dribbble.User.Shots.GetAllShotsForCurrent();
 
             Assert.True(shots.Count >= 0);
+        }
+    }
+
+    public class TheGetAllTeamsMethod
+    {
+        [IntegrationTest]
+        public async Task ReturnsAllTeams()
+        {
+            var dribbble = Helper.GetAuthenticatedClient();
+
+            var teams = await dribbble.User.Teams.GetAllTeams("simplebits");
+
+            Assert.True(teams.Count >= 1);
+        }
+    }
+
+    public class TheGetAllTeamsForCurrentMethod
+    {
+        [IntegrationTest]
+        public async Task ReturnsAllTeamsForCurrent()
+        {
+            var dribbble = Helper.GetAuthenticatedClient();
+
+            var teams = await dribbble.User.Teams.GetAllTeamsForCurrent();
+
+            Assert.True(teams.Count >= 0);
         }
     }
 }

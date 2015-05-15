@@ -1,5 +1,4 @@
-﻿using Dddesignkit.Clients;
-using Dddesignkit.Tests.Helpers;
+﻿using Dddesignkit.Tests.Helpers;
 using NSubstitute;
 using System;
 using System.Threading.Tasks;

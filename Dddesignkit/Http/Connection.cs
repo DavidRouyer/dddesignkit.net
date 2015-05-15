@@ -85,6 +85,11 @@ namespace Dddesignkit
             return SendData<T>(uri.ApplyParameters(parameters), HttpMethod.Get, null, accepts, null, cancellationToken);
         }
 
+        public Task<IApiResponse<T>> Put<T>(Uri uri, object body)
+        {
+            return SendData<T>(uri, HttpMethod.Put, body, null, null, CancellationToken.None);
+        }
+
         Task<IApiResponse<T>> SendData<T>(
             Uri uri,
             HttpMethod method,
@@ -145,6 +150,66 @@ namespace Dddesignkit
             }
 
             return Run<T>(request, cancellationToken);
+        }
+
+        /// <summary>
+        /// Performs an asynchronous HTTP PUT request that expects an empty response.
+        /// </summary>
+        /// <param name="uri">URI endpoint to send request to</param>
+        /// <returns>The returned <seealso cref="HttpStatusCode"/></returns>
+        public async Task<HttpStatusCode> Put(Uri uri)
+        {
+            Ensure.ArgumentNotNull(uri, "uri");
+
+            var request = new Request
+            {
+                Method = HttpMethod.Put,
+                BaseAddress = BaseAddress,
+                Endpoint = uri
+            };
+            var response = await Run<object>(request, CancellationToken.None);
+            return response.HttpResponse.StatusCode;
+        }
+
+        /// <summary>
+        /// Performs an asynchronous HTTP DELETE request that expects an empty response.
+        /// </summary>
+        /// <param name="uri">URI endpoint to send request to</param>
+        /// <returns>The returned <seealso cref="HttpStatusCode"/></returns>
+        public async Task<HttpStatusCode> Delete(Uri uri)
+        {
+            Ensure.ArgumentNotNull(uri, "uri");
+
+            var request = new Request
+            {
+                Method = HttpMethod.Delete,
+                BaseAddress = BaseAddress,
+                Endpoint = uri
+            };
+            var response = await Run<object>(request, CancellationToken.None);
+            return response.HttpResponse.StatusCode;
+        }
+
+        /// <summary>
+        /// Performs an asynchronous HTTP DELETE request that expects an empty response.
+        /// </summary>
+        /// <param name="uri">URI endpoint to send request to</param>
+        /// <param name="data">The object to serialize as the body of the request</param>
+        /// <returns>The returned <seealso cref="HttpStatusCode"/></returns>
+        public async Task<HttpStatusCode> Delete(Uri uri, object data)
+        {
+            Ensure.ArgumentNotNull(uri, "uri");
+            Ensure.ArgumentNotNull(data, "data");
+
+            var request = new Request
+            {
+                Method = HttpMethod.Delete,
+                Body = data,
+                BaseAddress = BaseAddress,
+                Endpoint = uri
+            };
+            var response = await Run<object>(request, CancellationToken.None);
+            return response.HttpResponse.StatusCode;
         }
 
         async Task<IApiResponse<T>> Run<T>(IRequest request, CancellationToken cancellationToken)

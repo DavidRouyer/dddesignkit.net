@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Dddesignkit.Clients
+namespace Dddesignkit
 {
     /// <summary>
     /// A client for Dribbble's Shots API.

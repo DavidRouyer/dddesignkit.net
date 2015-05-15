@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Dddesignkit.Clients
+namespace Dddesignkit
 {
     public interface IShotsClient
     {

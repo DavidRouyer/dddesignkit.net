@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Dddesignkit.Clients
+namespace Dddesignkit
 {
     public interface IUsersClient
     {
@@ -19,87 +19,51 @@ namespace Dddesignkit.Clients
         Task<User> Current();
 
         /// <summary>
-        /// Get all shots owned by the user.
+        /// A client for Dribbble's User Buckets API
         /// </summary>
-        /// <param name="username"></param>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Bucket}"/> of <see cref="Bucket"/>.</returns>
-        Task<IReadOnlyList<Bucket>> GetAllBuckets(string username);
+        /// <remarks>
+        /// See the <a href="http://developer.dribbble.com/v1/users/buckets/">Buckets API documentation</a> for more information.
+        ///</remarks>
+        IUserBucketsClient Buckets { get; }
 
         /// <summary>
-        /// Get all shots owned by the current user.
+        /// A client for Dribbble's User Followers API
         /// </summary>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Bucket}"/> of <see cref="Bucket"/>.</returns>
-        Task<IReadOnlyList<Bucket>> GetAllBucketsForCurrent();
+        /// <remarks>
+        /// See the <a href="http://developer.dribbble.com/v1/users/followers/">Followers API documentation</a> for more information.
+        ///</remarks>
+        IFollowersClient Followers { get; }
 
         /// <summary>
-        /// Get all followers of the user.
+        /// A client for Dribbble's User Likes API
         /// </summary>
-        /// <param name="username"></param>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Follower}"/> of <see cref="Follower"/>.</returns>
-        Task<IReadOnlyList<Followers>> GetAllFollowers(string username);
+        /// <remarks>
+        /// See the <a href="http://developer.dribbble.com/v1/users/likes/">Likes API documentation</a> for more information.
+        ///</remarks>
+        IUserLikesClient Likes { get; }
 
         /// <summary>
-        /// Get all followers for the current user.
+        /// A client for Dribbble's User Projects API
         /// </summary>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Follower}"/> of <see cref="Follower"/>.</returns>
-        Task<IReadOnlyList<Followers>> GetAllFollowersForCurrent();
+        /// <remarks>
+        /// See the <a href="http://developer.dribbble.com/v1/users/projects/">Projects API documentation</a> for more information.
+        ///</remarks>
+        IUserProjectsClient Projects { get; }
 
         /// <summary>
-        /// Get all users followed by the user.
+        /// A client for Dribbble's User Shots API
         /// </summary>
-        /// <param name="username"></param>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Following}"/> of <see cref="Following"/>.</returns>
-        Task<IReadOnlyList<Following>> GetAllFollowing(string username);
+        /// <remarks>
+        /// See the <a href="http://developer.dribbble.com/v1/users/shots/">Shots API documentation</a> for more information.
+        ///</remarks>
+        IUserShotsClient Shots { get; }
 
         /// <summary>
-        /// Get all users followed by the current user.
+        /// A client for Dribbble's User Teams API
         /// </summary>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Following}"/> of <see cref="Following"/>.</returns>
-        Task<IReadOnlyList<Following>> GetAllFollowingForCurrent();
-
-        /// <summary>
-        /// Get all shots for users followed by the current user.
-        /// </summary>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Following}"/> of <see cref="Following"/>.</returns>
-        Task<IReadOnlyList<Shot>> GetAllShotsUsersFollowedForCurrent();
-
-        /// <summary>
-        /// Get all shot likes for the user.
-        /// </summary>
-        /// <param name="username"></param>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Like}"/> of <see cref="Like"/>.</returns>
-        Task<IReadOnlyList<Like>> GetAllShotLikes(string username);
-
-        /// <summary>
-        /// Get all shot likes for the current user.
-        /// </summary>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Like}"/> of <see cref="Like"/>.</returns>
-        Task<IReadOnlyList<Like>> GetAllShotLikesForCurrent();
-
-        /// <summary>
-        /// Get all projects for the user.
-        /// </summary>
-        /// <param name="username"></param>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Project}"/> of <see cref="Project"/>.</returns>
-        Task<IReadOnlyList<Project>> GetAllProjects(string username);
-
-        /// <summary>
-        /// Get all projects for the current user.
-        /// </summary>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Project}"/> of <see cref="Project"/>.</returns>
-        Task<IReadOnlyList<Project>> GetAllProjectsForCurrent();
-
-        /// <summary>
-        /// Get all shots for the user.
-        /// </summary>
-        /// <param name="username"></param>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Shot}"/> of <see cref="Shot"/>.</returns>
-        Task<IReadOnlyList<Shot>> GetAllShots(string username);
-
-        /// <summary>
-        /// Get all shots for the current user.
-        /// </summary>
-        /// <returns>A <see cref="IReadOnlyPagedCollection{Shot}"/> of <see cref="Shot"/>.</returns>
-        Task<IReadOnlyList<Shot>> GetAllShotsForCurrent();
+        /// <remarks>
+        /// See the <a href="http://developer.dribbble.com/v1/users/teams/">Teams API documentation</a> for more information.
+        ///</remarks>
+        IUserTeamsClient Teams { get; }
     }
 }

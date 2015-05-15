@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,7 +34,39 @@ namespace Dddesignkit
         /// <param name="accepts">Specifies accepted response media types.</param>
         /// <param name="cancellationToken">A token used to cancel the Get request</param>
         /// <returns><seealso cref="IResponse"/> representing the received HTTP response</returns>
-        Task<IApiResponse<T>> Get<T>(Uri uri, IDictionary<string, string> parameters, string accepts, CancellationToken cancellationToken);  
+        Task<IApiResponse<T>> Get<T>(Uri uri, IDictionary<string, string> parameters, string accepts, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Performs an asynchronous HTTP PUT request.
+        /// Attempts to map the response body to an object of type <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">The type to map the response to</typeparam>
+        /// <param name="uri">URI endpoint to send request to</param>
+        /// <param name="body">The body of the request</param>
+        /// <returns><seealso cref="IResponse"/> representing the received HTTP response</returns>
+        Task<IApiResponse<T>> Put<T>(Uri uri, object body);
+
+        /// <summary>
+        /// Performs an asynchronous HTTP PUT request that expects an empty response.
+        /// </summary>
+        /// <param name="uri">URI endpoint to send request to</param>
+        /// <returns>The returned <seealso cref="HttpStatusCode"/></returns>
+        Task<HttpStatusCode> Put(Uri uri);
+
+        /// <summary>
+        /// Performs an asynchronous HTTP DELETE request that expects an empty response.
+        /// </summary>
+        /// <param name="uri">URI endpoint to send request to</param>
+        /// <returns>The returned <seealso cref="HttpStatusCode"/></returns>
+        Task<HttpStatusCode> Delete(Uri uri);
+
+        /// <summary>
+        /// Performs an asynchronous HTTP DELETE request that expects an empty response.
+        /// </summary>
+        /// <param name="uri">URI endpoint to send request to</param>
+        /// <param name="data">The object to serialize as the body of the request</param>
+        /// <returns>The returned <seealso cref="HttpStatusCode"/></returns>
+        Task<HttpStatusCode> Delete(Uri uri, object data);
 
         /// <summary>
         /// Base address for the connection.
