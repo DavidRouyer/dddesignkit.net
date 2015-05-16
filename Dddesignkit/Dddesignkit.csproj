@@ -56,8 +56,11 @@
     <Compile Include="Authentication\TokenAuthenticator.cs" />
     <Compile Include="Clients\ApiClient.cs" />
     <Compile Include="Clients\ApiPagination.cs" />
+    <Compile Include="Clients\BucketsClient.cs" />
     <Compile Include="Clients\FollowersClient.cs" />
+    <Compile Include="Clients\IBucketsClient.cs" />
     <Compile Include="Clients\IFollowersClient.cs" />
+    <Compile Include="Clients\IProjectsClient.cs" />
     <Compile Include="Clients\IShotsClient.cs" />
     <Compile Include="Clients\IUserBucketsClient.cs" />
     <Compile Include="Clients\IUserLikesClient.cs" />
@@ -65,6 +68,7 @@
     <Compile Include="Clients\IUsersClient.cs" />
     <Compile Include="Clients\IUserShotsClient.cs" />
     <Compile Include="Clients\IUserTeamsClient.cs" />
+    <Compile Include="Clients\ProjectsClient.cs" />
     <Compile Include="Clients\ShotsClient.cs" />
     <Compile Include="Clients\UserBucketsClient.cs" />
     <Compile Include="Clients\UserLikesClient.cs" />

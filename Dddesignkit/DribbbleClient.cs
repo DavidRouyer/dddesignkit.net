@@ -45,8 +45,11 @@ namespace Dddesignkit
 
             Connection = connection;
             var apiConnection = new ApiConnection(connection);
-            User = new UsersClient(apiConnection);
+
+            Buckets = new BucketsClient(apiConnection);
+            Projects = new ProjectsClient(apiConnection);
             Shots = new ShotsClient(apiConnection);
+            User = new UsersClient(apiConnection);
         }
 
         /// <summary>
@@ -83,12 +86,20 @@ namespace Dddesignkit
         public IConnection Connection { get; private set; }
 
         /// <summary>
-        /// Access Dribbble's Users API.
+        /// Access Dribbble's Buckets API.
         /// </summary>
         /// <remarks>
-        /// Refer to the API docmentation for more information: https://developer.dribbble.com/v1/users/
+        /// Refer to the API docmentation for more information: http://developer.dribbble.com/v1/buckets/
         /// </remarks>
-        public IUsersClient User { get; private set; }
+        public IBucketsClient Buckets { get; private set; }
+
+        /// <summary>
+        /// Access Dribbble's Projects API.
+        /// </summary>
+        /// <remarks>
+        /// Refer to the API docmentation for more information: https://developer.dribbble.com/v1/projects/
+        /// </remarks>
+        public IProjectsClient Projects { get; private set; }
 
         /// <summary>
         /// Access Dribbble's Shots API.
@@ -97,5 +108,13 @@ namespace Dddesignkit
         /// Refer to the API docmentation for more information: https://developer.dribbble.com/v1/shots/
         /// </remarks>
         public IShotsClient Shots { get; private set; }
+
+        /// <summary>
+        /// Access Dribbble's Users API.
+        /// </summary>
+        /// <remarks>
+        /// Refer to the API docmentation for more information: https://developer.dribbble.com/v1/users/
+        /// </remarks>
+        public IUsersClient User { get; private set; }
     }
 }

@@ -11,19 +11,35 @@
         IConnection Connection { get; }
 
         /// <summary>
-        /// Access Dribbble's Users API.
+        /// Access Dribbble's Buckets API.
         /// </summary>
         /// <remarks>
-        /// Refer to the API docmentation for more information: https://developer.dribbble.com/v1/users/
+        /// Refer to the API docmentation for more information: http://developer.dribbble.com/v1/buckets/
         /// </remarks>
-        IUsersClient User { get; }
+        IBucketsClient Buckets { get; }
+
+        /// <summary>
+        /// Access Dribbble's Projects API.
+        /// </summary>
+        /// <remarks>
+        /// Refer to the API docmentation for more information: http://developer.dribbble.com/v1/projects/
+        /// </remarks>
+        IProjectsClient Projects { get; }
 
         /// <summary>
         /// Access Dribbble's Shots API.
         /// </summary>
         /// <remarks>
-        /// Refer to the API docmentation for more information: https://developer.dribbble.com/v1/shots/
+        /// Refer to the API docmentation for more information: http://developer.dribbble.com/v1/shots/
         /// </remarks>
         IShotsClient Shots { get; }
+
+        /// <summary>
+        /// Access Dribbble's Users API.
+        /// </summary>
+        /// <remarks>
+        /// Refer to the API docmentation for more information: http://developer.dribbble.com/v1/users/
+        /// </remarks>
+        IUsersClient User { get; }
     }
 }

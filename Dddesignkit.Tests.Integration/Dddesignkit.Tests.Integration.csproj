@@ -64,7 +64,9 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Clients\BucketsClientTests.cs" />
     <Compile Include="Clients\FollowersClientTests.cs" />
+    <Compile Include="Clients\ProjectsClientTests.cs" />
     <Compile Include="Clients\ShotsClientTests.cs" />
     <Compile Include="Clients\UsersClientTests.cs" />
     <Compile Include="Helper.cs" />
