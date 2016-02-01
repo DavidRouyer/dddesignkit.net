@@ -5,5 +5,3 @@ build_script:
   - cmd: build.cmd UnitTests
   - cmd: build.cmd IntegrationTests Release -ev DDDESIGNKIT_DRIBBBLEUSERNAME "%DDDESIGNKIT_DRIBBBLEUSERNAME%" -ev DDDESIGNKIT_OAUTHTOKEN "%DDDESIGNKIT_OAUTHTOKEN%"
 test: off
-artifacts:
-  - path: packaging\*.nupkg
