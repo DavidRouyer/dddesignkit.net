@@ -24,10 +24,10 @@ if %TARGET%=="RunIntegrationTests" (SET RunBuild=1)
 if %TARGET%=="CreatePackages" (SET RunBuild=1)
 
 if NOT "%RunBuild%"=="" (
-"tools\FAKE.Core\tools\Fake.exe" "build.fsx" "BuildApp" "buildMode" "%BUILDMODE%"
+"tools\FAKE.Core\tools\Fake.exe" "build.fsx" "target=BuildApp" "buildMode=%BUILDMODE%"
 )
 
-"tools\FAKE.Core\tools\Fake.exe" "build.fsx" "%TARGET%" "buildMode" "%BUILDMODE%"
+"tools\FAKE.Core\tools\Fake.exe" "build.fsx" "target=%TARGET%" "buildMode=%BUILDMODE%"
 
 rem Bail if we're running a TeamCity build.
 if defined TEAMCITY_PROJECT_NAME goto Quit

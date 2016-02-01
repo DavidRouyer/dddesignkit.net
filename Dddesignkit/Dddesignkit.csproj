@@ -104,7 +104,6 @@
     <Compile Include="Http\IConnection.cs" />
     <Compile Include="Http\ICredentialStore.cs" />
     <Compile Include="Http\IHttpClient.cs" />
-    <Compile Include="Http\IJsonSerializer.cs" />
     <Compile Include="Http\InMemoryCredentialStore.cs" />
     <Compile Include="Http\IRequest.cs" />
     <Compile Include="Http\IResponse.cs" />
@@ -115,7 +114,6 @@
     <Compile Include="Http\ReadOnlyPagedCollection.cs" />
     <Compile Include="Http\Request.cs" />
     <Compile Include="Http\Response.cs" />
-    <Compile Include="Http\SimpleJsonSerializer.cs" />
     <Compile Include="IDribbbleClient.cs" />
     <Compile Include="Models\Response\Account.cs" />
     <Compile Include="Models\Response\ApiError.cs" />

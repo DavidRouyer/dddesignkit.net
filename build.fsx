@@ -30,7 +30,7 @@ Target "Clean" (fun _ ->
 )
 
 open Fake.AssemblyInfoFile
-open Fake.XUnit2Helper
+open Fake.Testing
 
 Target "AssemblyInfo" (fun _ ->
     CreateCSharpAssemblyInfo "./SolutionInfo.cs"
@@ -59,7 +59,7 @@ Target "UnitTests" (fun _ ->
     !! (sprintf "./Dddesignkit.Tests/bin/%s/**/Dddesignkit.Tests*.dll" buildMode)
     |> xUnit2 (fun p -> 
             {p with
-                OutputDir = testResultsDir })
+                HtmlOutputPath = Some (testResultsDir @@ "xunit.html") })
 )
 
 Target "IntegrationTests" (fun _ ->
@@ -67,7 +67,7 @@ Target "IntegrationTests" (fun _ ->
         !! (sprintf "./Dddesignkit.Tests.Integration/bin/%s/**/Dddesignkit.Tests.Integration.dll" buildMode)
         |> xUnit2 (fun p -> 
                 {p with 
-                    OutputDir = testResultsDir
+                    HtmlOutputPath = Some (testResultsDir @@ "xunit.html")
                     TimeOut = TimeSpan.FromMinutes 10.0  })
     else
         "The integration tests were skipped because the DDDESIGNKIT_OAUTHTOKEN environment variables are not set. " +
